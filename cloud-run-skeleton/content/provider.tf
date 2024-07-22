@@ -1,4 +1,7 @@
 terraform {
+  backend "gcs" {
+    bucket = "tf-state-learning-poc"
+  }
   required_providers {
     google = {
       source  = "hashicorp/google"
