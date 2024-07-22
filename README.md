@@ -1,6 +1,6 @@
-# FastAPI GCP Infrastructure Boilerplate
+# FastAPI GCP Infrastructure-as-Code Templates
 
-This boilerplate is used to provision the required GCP infrastructure needed for a Python FastAPI service.
+This template is used to provision the required GCP infrastructure needed for a Python FastAPI service.
 
 ## Available Features
 
