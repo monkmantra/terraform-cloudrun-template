@@ -7,6 +7,7 @@ on:
 env:
   APP_NAME: ${{ values.app_name }}
   GCP_PROJECT_ID: ${{ values.project_id }}
+  DB_NAME: ${{ values.spanner_db_name }}
 
 {% raw %}
 jobs:
@@ -55,6 +56,14 @@ jobs:
     - name: Terraform Apply
       run: terraform apply tf.plan
       working-directory: .
+    
+    - name: Insert data in Spanner database
+      run: |
+        gcloud spanner databases execute-sql ${{ env.DB_NAME }} --instance=appdb --sql="INSERT tasks(title, status) VALUES('Create Backstage environment','Completed')"
+        gcloud spanner databases execute-sql ${{ env.DB_NAME }} --instance=appdb --sql="INSERT tasks(title, status) VALUES('Create Application Templates','Completed')"
+        gcloud spanner databases execute-sql ${{ env.DB_NAME }} --instance=appdb --sql="INSERT tasks(title, status) VALUES('Create Terraform Templates','Completed')"
+        gcloud spanner databases execute-sql ${{ env.DB_NAME }} --instance=appdb --sql="INSERT tasks(title, status) VALUES('Create demo presentation','Pending')"
+        gcloud spanner databases execute-sql ${{ env.DB_NAME }} --instance=appdb --sql="INSERT tasks(title, status) VALUES('Actual demo','Pending')"
     
     # Update cloud run with latest image
     - name: Update Cloud Run

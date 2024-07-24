@@ -21,7 +21,7 @@ variable "region" {
   default     = "us-east4"
 }
 
-# variable "dockerimage" {
-#   type        = string
-#   description = "Docker image URL"
-# }
+variable "db_name" {
+  type        = string
+  description = "Spanner database name"
+}
