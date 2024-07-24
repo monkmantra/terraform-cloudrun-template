@@ -52,7 +52,12 @@ jobs:
       working-directory: .
       
     # Apply the Terraform plan
-    - name: terraform Apply
+    - name: Terraform Apply
       run: terraform apply tf.plan
       working-directory: .
+    
+    # Update cloud run with latest image
+    - name: Update Cloud Run
+      run: |
+        gcloud run deploy idp-${{ env.APP_NAME }} --image "us-east4-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/python-fastapi/${{ env.APP_NAME }}:latest" --region "us-east4" --project ${{ env.GCP_PROJECT_ID }}
 {% endraw %}  
