@@ -47,6 +47,7 @@ resource "google_cloud_run_v2_service" "default" {
           app_type = "fastapi"
           cost_center = "${{ values.cost_center }}"
           irisk_id = "${{ values.irisk_id }}"
+          app_name = "${{ values.app_name }}"
       }
     }
   }
