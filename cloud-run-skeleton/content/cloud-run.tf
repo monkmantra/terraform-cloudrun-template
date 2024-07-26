@@ -42,6 +42,7 @@ resource "google_cloud_run_v2_service" "default" {
         network = replace(data.google_compute_subnetwork.subnet-1.network, "https://www.googleapis.com/compute/v1/", "")
         subnetwork = data.google_compute_subnetwork.subnet-1.name
       }
+    }
     labels = {
           environment = "development"
           app_type = "fastapi"
@@ -49,6 +50,5 @@ resource "google_cloud_run_v2_service" "default" {
           irisk_id = "${{ values.irisk_id }}"
           app_name = "${{ values.app_name }}"
       }
-    }
   }
 }
