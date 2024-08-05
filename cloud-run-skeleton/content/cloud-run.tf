@@ -22,7 +22,7 @@ resource "google_cloud_run_v2_service_iam_policy" "noauth" {
 
 resource "google_cloud_run_v2_service" "default" {
   project  = var.project_id
-  name     = "idp-${var.app_name}"
+  name     = "${var.app_name}"
   location = var.region
   ingress  = "INGRESS_TRAFFIC_ALL"
 
