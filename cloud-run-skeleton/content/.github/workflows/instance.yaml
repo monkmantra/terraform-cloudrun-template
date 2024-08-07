@@ -53,6 +53,22 @@ jobs:
     - name: Terraform Plan
       run: terraform plan -out tf.plan
       working-directory: .
+
+    - name: Setup OPA
+      uses: open-policy-agent/setup-opa@v2
+      with:
+        version: latest
+
+    - name: Checkout OPA policies
+      uses: actions/checkout@v4
+      with:
+        repository: monkmantra/policy-as-code-iac
+        path: opa
+
+    - name: Evaluate OPA policies
+      run: |
+        terraform show tf.plan > tf.json
+        opa eval -i tf.json -d opa/ -f pretty
       
     # Apply the Terraform plan
     - name: Terraform Apply
