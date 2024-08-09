@@ -66,9 +66,15 @@ jobs:
         path: opa
 
     - name: Evaluate OPA policies
-      run: |
-        terraform show tf.plan > tf.json
-        opa eval -i tf.json -d opa/ -f pretty
+      shell: bash
+      run: |-
+        terraform show -json tf.plan | jq > tf.json
+        result=$(echo | opa eval -f pretty -d opa/opa.rego -i tf.json "data.policy.deny")
+        if [[ $result != "[]" ]]; then
+          echo '### OPA Policy Violation' >> $GITHUB_STEP_SUMMARY
+          echo $result >> $GITHUB_STEP_SUMMARY
+          exit 1
+        fi
       
     # Apply the Terraform plan
     - name: Terraform Apply
