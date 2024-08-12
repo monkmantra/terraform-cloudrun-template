@@ -14,7 +14,7 @@ env:
 {% raw %}
 jobs:
   deploy-cloudrun:
-    name: Build
+    name: Deploy Cloud Resources
     runs-on: ubuntu-latest
     permissions:
       id-token: write
