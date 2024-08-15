@@ -1,5 +1,5 @@
-site_name: "Terraform Cloud Run for ${{ values.app_name }}"
-site_description: "This is a Terraform module for deploying docker image using Cloud Run. ${{ values.description }}"
+site_name: "${{ values.app_name }} - IaC"
+site_description: "Infra as Code to provision GCP resources and deploy ***${{ values.app_name }}***'s Docker image"
 
 nav:
   - Introduction: index.md
