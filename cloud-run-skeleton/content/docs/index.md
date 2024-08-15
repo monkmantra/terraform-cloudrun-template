@@ -1,6 +1,10 @@
-# Terraform Cloud Run Deployment for ${{ values.app_name }}
+# ${{ values.name }} - Infra as Code
 
-This is a Terraform module for deploying docker image using Cloud Run. ${{ values.description }}
+This repo has the following:
+- Terraform module to create a Cloud Run instance
+- Terraform module to create a Cloud Spanner database
+- GitHub Actions CD pipeline to provision the above resources in GCP Project ***${{ values.project_id }}*** and then deploy the Docker image for ***${{ values.app_name }}*** application from Artifact Registry
 
-- It will create a Cloud Run instance with the latest docker image of FastAPI application.
-- The FastAPI application docker image is build as part of FastAPI application template.
+## Getting started
+
+Start writing your documentation by replacing the content in this file and/or adding more markdown (.md) files to this folder (/docs).
