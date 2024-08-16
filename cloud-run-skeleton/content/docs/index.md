@@ -1,4 +1,4 @@
-# ${{ values.name }} - Infra as Code
+# ${{ values.app_name }} - Infra as Code
 
 This repo has the following:
 - Terraform module to create a Cloud Run instance
