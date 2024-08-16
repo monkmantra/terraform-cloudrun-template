@@ -8,6 +8,6 @@ metadata:
     backstage.io/techdocs-ref: dir:.
     github.com/project-slug: monkmantra/${{ values.app_name }}-iac
 spec:
-  type: service
+  type: infra
   owner: user:de-ims
   lifecycle: experimental
