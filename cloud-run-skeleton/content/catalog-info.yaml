@@ -7,6 +7,8 @@ metadata:
     "backstage.io/cloud-run": ${{ values.app_name | dump }}
     backstage.io/techdocs-ref: dir:.
     github.com/project-slug: monkmantra/${{ values.app_name }}-iac
+  tags:
+    - de-ims-infra
 spec:
   type: infra
   owner: user:de-ims
