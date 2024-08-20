@@ -98,10 +98,10 @@ jobs:
     - name: Insert demo data in Spanner database
       shell: bash
       run: |-
-        db_name=$(echo "${{ env.DB_NAME }}" | awk '{print tolower($0)}')
-        gcloud spanner databases execute-sql $db_name --instance=appdb --sql="INSERT tasks(title, status) VALUES('Create IDP environment','Completed')"
-        gcloud spanner databases execute-sql $db_name --instance=appdb --sql="INSERT tasks(title, status) VALUES('Create application templates','Completed')"
-        gcloud spanner databases execute-sql $db_name --instance=appdb --sql="INSERT tasks(title, status) VALUES('Create Terraform templates','Completed')"
-        gcloud spanner databases execute-sql $db_name --instance=appdb --sql="INSERT tasks(title, status) VALUES('Prepare demo presentation','Completed')"
-        gcloud spanner databases execute-sql $db_name --instance=appdb --sql="INSERT tasks(title, status) VALUES('Do the actual demo','In Progress')"
+        echo db_name_lowercase=$(echo "${{ env.DB_NAME }}" | awk '{print tolower($0)}') >> $GITHUB_ENV
+        gcloud spanner databases execute-sql ${db_name_lowercase} --instance=appdb --sql="INSERT tasks(title, status) VALUES('Create IDP environment','Completed')"
+        gcloud spanner databases execute-sql ${db_name_lowercase} --instance=appdb --sql="INSERT tasks(title, status) VALUES('Create application templates','Completed')"
+        gcloud spanner databases execute-sql ${db_name_lowercase} --instance=appdb --sql="INSERT tasks(title, status) VALUES('Create Terraform templates','Completed')"
+        gcloud spanner databases execute-sql ${db_name_lowercase} --instance=appdb --sql="INSERT tasks(title, status) VALUES('Prepare demo presentation','Completed')"
+        gcloud spanner databases execute-sql ${db_name_lowercase} --instance=appdb --sql="INSERT tasks(title, status) VALUES('Do the actual demo','In Progress')"
 {% endraw %}  
