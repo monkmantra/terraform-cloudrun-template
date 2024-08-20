@@ -1,3 +1,6 @@
+locals {
+  app_name = lower(${var.app_name})
+}
 data "google_compute_subnetwork" "subnet-1" {
   name    = "subnet-1"
   region  = var.region
@@ -22,7 +25,7 @@ resource "google_cloud_run_v2_service_iam_policy" "noauth" {
 
 resource "google_cloud_run_v2_service" "default" {
   project  = var.project_id
-  name     = lower("${var.app_name}")
+  name     = local.app_name
   location = var.region
   ingress  = "INGRESS_TRAFFIC_ALL"
 
@@ -33,7 +36,7 @@ resource "google_cloud_run_v2_service" "default" {
       ports {
         container_port = 8000
       }
-      image   = "us-east4-docker.pkg.dev/${var.project_id}/python-fastapi/lower("${var.app_name}"):latest"
+      image   = "us-east4-docker.pkg.dev/${var.project_id}/python-fastapi/${local.app_name}:latest"
       # image = "httpd:latest"
     }
     vpc_access {
@@ -50,6 +53,6 @@ resource "google_cloud_run_v2_service" "default" {
           app_type = "fastapi"
           cost_center = "${{ values.cost_center }}"
           irisk_id = "${{ values.irisk_id }}"
-          app_name = lower("${{ values.app_name }}")
+          app_name = local.app_name
       }
 }
