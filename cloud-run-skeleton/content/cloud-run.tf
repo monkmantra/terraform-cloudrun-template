@@ -22,7 +22,7 @@ resource "google_cloud_run_v2_service_iam_policy" "noauth" {
 
 resource "google_cloud_run_v2_service" "default" {
   project  = var.project_id
-  name     = "${var.app_name}"
+  name     = var.app_name
   location = var.region
   ingress  = "INGRESS_TRAFFIC_ALL"
 
@@ -50,6 +50,6 @@ resource "google_cloud_run_v2_service" "default" {
           app_type = "fastapi"
           cost_center = "${{ values.cost_center }}"
           irisk_id = "${{ values.irisk_id }}"
-          app_name = "${{ values.app_name }}"
+          app_name = var.app_name
       }
 }
