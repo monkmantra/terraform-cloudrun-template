@@ -10,6 +10,6 @@ metadata:
   tags:
     - de-ims-infra
 spec:
-  type: infra
+  type: service
   owner: user:de-ims
   lifecycle: experimental
