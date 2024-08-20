@@ -96,10 +96,12 @@ jobs:
       working-directory: .
     
     - name: Insert demo data in Spanner database
-      run: |
-        gcloud spanner databases execute-sql ${{ env.DB_NAME }} --instance=appdb --sql="INSERT tasks(title, status) VALUES('Create IDP environment','Completed')"
-        gcloud spanner databases execute-sql ${{ env.DB_NAME }} --instance=appdb --sql="INSERT tasks(title, status) VALUES('Create application templates','Completed')"
-        gcloud spanner databases execute-sql ${{ env.DB_NAME }} --instance=appdb --sql="INSERT tasks(title, status) VALUES('Create Terraform templates','Completed')"
-        gcloud spanner databases execute-sql ${{ env.DB_NAME }} --instance=appdb --sql="INSERT tasks(title, status) VALUES('Prepare demo presentation','Completed')"
-        gcloud spanner databases execute-sql ${{ env.DB_NAME }} --instance=appdb --sql="INSERT tasks(title, status) VALUES('Do the actual demo','In Progress')"
+      shell: bash
+      run: |-
+        db_name=$(echo "${{ env.DB_NAME }}" | awk '{print tolower($0)}')
+        gcloud spanner databases execute-sql $db_name --instance=appdb --sql="INSERT tasks(title, status) VALUES('Create IDP environment','Completed')"
+        gcloud spanner databases execute-sql $db_name --instance=appdb --sql="INSERT tasks(title, status) VALUES('Create application templates','Completed')"
+        gcloud spanner databases execute-sql $db_name --instance=appdb --sql="INSERT tasks(title, status) VALUES('Create Terraform templates','Completed')"
+        gcloud spanner databases execute-sql $db_name --instance=appdb --sql="INSERT tasks(title, status) VALUES('Prepare demo presentation','Completed')"
+        gcloud spanner databases execute-sql $db_name --instance=appdb --sql="INSERT tasks(title, status) VALUES('Do the actual demo','In Progress')"
 {% endraw %}  
