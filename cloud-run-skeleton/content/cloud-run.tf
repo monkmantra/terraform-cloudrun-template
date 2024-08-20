@@ -1,5 +1,5 @@
 locals {
-  app_name = lower(${var.app_name})
+  app_name = lower("${var.app_name}")
 }
 data "google_compute_subnetwork" "subnet-1" {
   name    = "subnet-1"
